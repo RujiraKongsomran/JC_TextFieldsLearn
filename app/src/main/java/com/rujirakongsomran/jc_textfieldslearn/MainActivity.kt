@@ -10,7 +10,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,9 +38,14 @@ fun Greeting() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        var text by remember {
+            mutableStateOf("Type here...")
+        }
         TextField(
-            value = "Type here...",
-            onValueChange = {}
+            value = text,
+            onValueChange = {
+                text = it
+            }
         )
     }
 }
