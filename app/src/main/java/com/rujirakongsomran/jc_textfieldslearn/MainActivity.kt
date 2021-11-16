@@ -46,7 +46,7 @@ fun Greeting() {
         var text by remember {
             mutableStateOf("Type here...")
         }
-        TextField(
+        OutlinedTextField(
             value = text,
             onValueChange = {
                 text = it
