@@ -45,7 +45,8 @@ fun Greeting() {
             value = text,
             onValueChange = {
                 text = it
-            }
+            },
+            enabled = false
         )
     }
 }
