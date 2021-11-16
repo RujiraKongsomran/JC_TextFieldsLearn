@@ -48,7 +48,8 @@ fun Greeting() {
             },
             label = {
                 Text(text = "Title")
-            }
+            },
+            singleLine = true
         )
     }
 }
