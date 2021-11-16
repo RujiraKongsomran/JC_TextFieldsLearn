@@ -1,6 +1,7 @@
 package com.rujirakongsomran.jc_textfieldslearn
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -52,6 +54,16 @@ fun Greeting() {
                 IconButton(onClick = { /*TODO*/ }) {
                     Icon(
                         imageVector = Icons.Filled.Email,
+                        contentDescription = null
+                    )
+                }
+            },
+            trailingIcon = {
+                IconButton(onClick = {
+                    Log.d("Trailing Icon", "Clicked")
+                }) {
+                    Icon(
+                        imageVector = Icons.Filled.Check,
                         contentDescription = null
                     )
                 }
