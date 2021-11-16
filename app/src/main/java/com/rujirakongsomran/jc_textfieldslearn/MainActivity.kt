@@ -46,7 +46,9 @@ fun Greeting() {
             onValueChange = {
                 text = it
             },
-            readOnly = true
+            label = {
+                Text(text = "Title")
+            }
         )
     }
 }
