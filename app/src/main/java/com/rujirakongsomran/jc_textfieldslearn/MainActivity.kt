@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.rujirakongsomran.jc_textfieldslearn.ui.theme.JC_TextFieldsLearnTheme
@@ -17,7 +18,7 @@ class MainActivity : ComponentActivity() {
             JC_TextFieldsLearnTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    Greeting()
                 }
             }
         }
@@ -25,14 +26,16 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun Greeting() {
+    TextField(
+        value = "Type here...",
+        onValueChange = {})
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JC_TextFieldsLearnTheme {
-        Greeting("Android")
+        Greeting()
     }
 }
