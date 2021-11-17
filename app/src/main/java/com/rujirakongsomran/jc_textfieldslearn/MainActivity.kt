@@ -107,6 +107,9 @@ fun PasswordTextField() {
             value = password,
             onValueChange = {
                 password = it
+            },
+            placeholder = {
+                Text(text = "Password")
             }
         )
     }
