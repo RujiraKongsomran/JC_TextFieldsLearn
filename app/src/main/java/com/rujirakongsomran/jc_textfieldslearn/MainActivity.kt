@@ -5,17 +5,15 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -29,7 +27,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rujirakongsomran.jc_textfieldslearn.ui.theme.JC_TextFieldsLearnTheme
-import kotlin.reflect.KProperty
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +35,7 @@ class MainActivity : ComponentActivity() {
             JC_TextFieldsLearnTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    PasswordTextField()
+                    LoginUI()
                 }
             }
         }
@@ -132,7 +129,7 @@ fun PasswordTextField() {
                 }) {
                     Icon(
                         painter = icon,
-                        contentDescription = "visibility Icon"
+                        contentDescription = "Visibility Icon"
                     )
                 }
             },
@@ -145,10 +142,112 @@ fun PasswordTextField() {
     }
 }
 
+@Composable
+fun LoginUI() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(40.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        var text by remember {
+            mutableStateOf("")
+        }
+        var password by rememberSaveable {
+            mutableStateOf("")
+        }
+
+        var passwordVisibility by remember {
+            mutableStateOf(false)
+        }
+
+        val icon = if (passwordVisibility)
+            painterResource(id = R.drawable.design_ic_visibility)
+        else
+            painterResource(id = R.drawable.design_ic_visibility_off)
+
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = text,
+            onValueChange = {
+                text = it
+            },
+            label = {
+                Text(text = "Username")
+            },
+            singleLine = true,
+            leadingIcon = {
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        imageVector = Icons.Filled.Person,
+                        contentDescription = "Username Icon"
+                    )
+                }
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+            )
+        )
+
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = password,
+            onValueChange = {
+                password = it
+            },
+            placeholder = {
+                Text(text = "Password")
+            },
+            label = {
+                Text(text = "Password")
+            },
+            leadingIcon = {
+                IconButton(onClick = { }) {
+                    Icon(
+                        imageVector = Icons.Filled.Lock,
+                        contentDescription = "Password Icon"
+                    )
+                }
+            },
+            trailingIcon = {
+                IconButton(onClick = {
+                    passwordVisibility = !passwordVisibility
+                }) {
+                    Icon(
+                        painter = icon,
+                        contentDescription = "Visibility Icon"
+                    )
+                }
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password
+            ),
+            visualTransformation = if (passwordVisibility) VisualTransformation.None
+            else PasswordVisualTransformation()
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = { /* ... */ },
+            // Uses ButtonDefaults.ContentPadding by default
+            contentPadding = PaddingValues(
+                start = 20.dp,
+                top = 16.dp,
+                end = 20.dp,
+                bottom = 16.dp
+            ),
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Login")
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     JC_TextFieldsLearnTheme {
-        PasswordTextField()
+        LoginUI()
     }
 }
