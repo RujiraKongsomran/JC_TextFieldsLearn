@@ -162,6 +162,10 @@ fun LoginUI() {
             mutableStateOf(false)
         }
 
+        val isFormValid by derivedStateOf {
+            username.isNotBlank() && password.length >= 6
+        }
+
         val icon = if (passwordVisibility)
             painterResource(id = R.drawable.design_ic_visibility)
         else
@@ -248,6 +252,7 @@ fun LoginUI() {
                 bottom = 16.dp
             ),
             modifier = Modifier.fillMaxWidth(),
+            enabled = isFormValid
         ) {
             Text("Login")
         }
