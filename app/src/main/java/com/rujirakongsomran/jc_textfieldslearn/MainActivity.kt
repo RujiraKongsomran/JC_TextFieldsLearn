@@ -110,6 +110,9 @@ fun PasswordTextField() {
             },
             placeholder = {
                 Text(text = "Password")
+            },
+            label = {
+                Text(text = "Password")
             }
         )
     }
