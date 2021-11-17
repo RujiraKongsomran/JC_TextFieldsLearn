@@ -6,12 +6,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.*
@@ -151,7 +151,7 @@ fun LoginUI() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        var text by remember {
+        var username by remember {
             mutableStateOf("")
         }
         var password by rememberSaveable {
@@ -169,9 +169,9 @@ fun LoginUI() {
 
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
-            value = text,
+            value = username,
             onValueChange = {
-                text = it
+                username = it
             },
             label = {
                 Text(text = "Username")
@@ -187,7 +187,17 @@ fun LoginUI() {
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
-            )
+            ),
+            trailingIcon = {
+                if (username.isNotBlank()) {
+                    IconButton(onClick = { username = "" }) {
+                        Icon(
+                            imageVector = Icons.Filled.Clear,
+                            contentDescription = "Clear Icon"
+                        )
+                    }
+                }
+            }
         )
 
         OutlinedTextField(
