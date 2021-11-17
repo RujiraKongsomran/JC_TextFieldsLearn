@@ -21,6 +21,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -103,6 +104,15 @@ fun PasswordTextField() {
         verticalArrangement = Arrangement.Center
     ) {
         var password by rememberSaveable { mutableStateOf("") }
+        var passwordVisibility by remember {
+            mutableStateOf(false)
+        }
+
+        val icon = if (passwordVisibility)
+            painterResource(id = R.drawable.design_ic_visibility)
+        else
+            painterResource(id = R.drawable.design_ic_visibility_off)
+
         OutlinedTextField(
             value = password,
             onValueChange = {
@@ -113,6 +123,16 @@ fun PasswordTextField() {
             },
             label = {
                 Text(text = "Password")
+            },
+            trailingIcon = {
+                IconButton(onClick = {
+                    passwordVisibility = !passwordVisibility
+                }) {
+                    Icon(
+                        painter = icon,
+                        contentDescription = "visibility Icon"
+                    )
+                }
             }
         )
     }
