@@ -26,14 +26,19 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.rujirakongsomran.jc_textfieldslearn.ui.theme.JC_TextFieldsLearnTheme
 
 class MainActivity : ComponentActivity() {
+
+    lateinit var navController: NavHostController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             JC_TextFieldsLearnTheme {
-
+                navController = rememberNavController()
             }
         }
     }
