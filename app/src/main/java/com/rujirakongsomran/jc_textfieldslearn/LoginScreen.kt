@@ -17,10 +17,14 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.rujirakongsomran.jc_textfieldslearn.ui.theme.JC_TextFieldsLearnTheme
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    navController: NavHostController
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -120,7 +124,9 @@ fun LoginScreen() {
 
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            onClick = { /* ... */ },
+            onClick = {
+                navController.navigate(route = Screen.Home.route)
+            },
             // Uses ButtonDefaults.ContentPadding by default
             contentPadding = PaddingValues(
                 start = 20.dp,
@@ -140,6 +146,8 @@ fun LoginScreen() {
 @Composable
 fun LoginScreenPreview() {
     JC_TextFieldsLearnTheme {
-        LoginScreen()
+        LoginScreen(
+            navController = rememberNavController()
+        )
     }
 }
