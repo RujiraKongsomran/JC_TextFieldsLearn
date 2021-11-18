@@ -39,6 +39,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             JC_TextFieldsLearnTheme {
                 navController = rememberNavController()
+                SetupNavGraph(navController = navController)
             }
         }
     }
