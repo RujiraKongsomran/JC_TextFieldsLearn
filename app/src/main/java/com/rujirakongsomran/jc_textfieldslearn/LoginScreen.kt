@@ -1,5 +1,6 @@
 package com.rujirakongsomran.jc_textfieldslearn
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -11,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -85,11 +87,21 @@ fun LoginScreen(
             }
         )
 
+        val context = LocalContext.current
+        val maxChar = 6
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = password,
             onValueChange = {
-                password = it
+                if (it.length <= maxChar) {
+                    Toast.makeText(
+                        context,
+                        "it: $it",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    password = it
+                }
+
             },
             placeholder = {
                 Text(text = "Password")
@@ -97,6 +109,7 @@ fun LoginScreen(
             label = {
                 Text(text = "Password")
             },
+            maxLines = 1,
             leadingIcon = {
                 IconButton(onClick = { }) {
                     Icon(
